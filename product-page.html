@@ -9,9 +9,6 @@
     <title>The Craftsman Legacy | Handcrafted Brass Decor</title>
 </head>
 <body>
-    <div style="background:#7C3AED;color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-family:sans-serif;letter-spacing:0.02em;position:sticky;top:0;z-index:9999;">
-  🔒 Demo Project — Contact details and content are for illustration purposes only.
-</div>
       <header>
         <div class="contaner">
             <div class="logo-link">
@@ -45,28 +42,76 @@
                     <div class="product-gallery">
 
                         <div class="main-product-img">
-                            <img id="mainimage" src="WhatsApp Image 2025-12-22 at 10.40.41 PM (1).jpeg" alt="">
-                        </div>
 
+    <div class="product-image-wrapper">
+
+        <img id="product-image">
+
+        <div class="magnifier" id="magnifier"></div>
+
+    </div>
+
+</div>
                        
                 </div>
                     <div class="product-details">
-                        <h1>Brass</h1>
-                        <p class="product-discription">
-                            This handcrafted brass bowl is designed with traditional embossing techniques,
-                            making it perfect for luxury interiors, hospitality décor, and table styling.
-                        </p>
+                        <h1 id="product-name"></h1>
+                        <p id="product-description"></p>
                         <div class="product-specs">
-                            <p><strong>SKU:</strong> TCL-04</p>
-                            <p><strong>Material:</strong> Solid Brass</p>
-                            <p><strong>Finish:</strong> Antique Gold</p>
-                            <p><strong>Dimensions:</strong> 30 cm diameter</p>
+                            <p><strong>SKU:</strong> <span id="product-sku"></span></p>
+                            <p><strong>Material:</strong> <span id="product-material"></span></p>
+                            <p><strong>Finish:</strong> <span id="product-finish"></span></p>
+                            <p><strong>Dimensions:</strong> <span id="product-dimension"></span></p>
                         </div>
-                        <a href="https://wa.me/919540744418?text=Hello%20I%20am%20interested%20in%20Embossed%20Brass%20Bowl%20SKU%20TCL-04" class="WhatsApp-btn"> Chat on WhatsApp</a>
+
+                        <a href="#" class="WhatsApp-btn enquiry-btn">Enquire About Product
+                        </a>
+                        
                     </div>
                 </div>
             </div>
         </section>
+
+            <div class="enquiry-modal" id="enquiryModal">
+
+<div class="modal-content">
+
+<span class="close-modal">&times;</span>
+
+<h2>Product Enquiry</h2>
+
+<form id="enquiryForm">
+
+<input
+type="hidden"
+id="productName"
+value="Brass Bowl">
+
+<label>Full Name</label>
+<input type="text" required>
+
+<label>Email</label>
+<input type="email" required>
+
+<label>Company</label>
+<input type="text">
+
+<label>Country</label>
+<input type="text">
+
+<label>Message</label>
+<textarea rows="5"></textarea>
+
+<button type="submit" class="product-btn">
+Send Enquiry
+</button>
+
+</form>
+
+</div>
+
+</div>
+
         <section class="related-prodcuts">
             <div class="products-container">
                 <h2 class="section-title">Explore More Products</h2>
@@ -202,96 +247,250 @@
     </div>
     <script>
 
-let currentIndex = 0;
+// ==========================
+// PRODUCTS DATABASE
+// ==========================
 
-const images = document.querySelectorAll(".product-thumbnails img");
-const mainImage = document.getElementById("mainimage");
+const products = {
 
-function changeImage(element){
-mainImage.src = element.src;
+    1: {
+        name: "Embossed Brass Bowl",
+        sku: "TCL-001",
+        image: "brass-bowl.jpeg",
+        material: "Solid Brass",
+        finish: "Antique Gold",
+        dimension: "30 cm",
+        description: "Handcrafted embossed brass bowl."
+    },
+
+    2: {
+        name: "Brass Candle Holder",
+        sku: "TCL-002",
+        image: "candle-holder.jpeg",
+        material: "Solid Brass",
+        finish: "Matte Gold",
+        dimension: "25 cm",
+        description: "Elegant handcrafted candle holder."
+    },
+
+    3: {
+        name: "Decorative Brass Tray",
+        sku: "TCL-003",
+        image: "brass-tary.jpeg",
+        material: "Solid Brass",
+        finish: "Antique Gold",
+        dimension: "40 cm",
+        description: "Beautiful handcrafted brass serving tray."
+    }
+
+};
+
+
+// ==========================
+// GET PRODUCT ID
+// ==========================
+
+const params = new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const product = products[id];
+
+
+// ==========================
+// LOAD PRODUCT
+// ==========================
+
+if (product) {
+
+    document.getElementById("product-name").textContent = product.name;
+
+    document.getElementById("product-image").src = product.image;
+
+    document.getElementById("product-image").alt = product.name;
+
+    document.getElementById("product-description").textContent = product.description;
+
+    document.getElementById("product-sku").textContent = product.sku;
+
+    document.getElementById("product-material").textContent = product.material;
+
+    document.getElementById("product-finish").textContent = product.finish;
+
+    document.getElementById("product-dimension").textContent = product.dimension;
+
+    // Hidden field for enquiry form
+
+    const hiddenProduct = document.getElementById("productName");
+
+    if (hiddenProduct) {
+        hiddenProduct.value = product.name;
+    }
+
+}
+else{
+
+    document.querySelector("main").innerHTML =
+    "<h1 style='text-align:center;padding:100px;'>Product Not Found</h1>";
+
 }
 
-images.forEach((img,index)=>{
 
-img.onclick = function(){
-changeImage(this);
-currentIndex = index;
-}
 
-});
+// ==========================
+// IMAGE LIGHTBOX
+// ==========================
 
-mainImage.addEventListener("click", function(){
-openLightbox(mainImage.src);
-});
-
-function openLightbox(src){
+const mainImage = document.getElementById("product-image");
 
 const lightbox = document.getElementById("lightbox");
+
 const lightboxImg = document.getElementById("lightbox-img");
 
-lightbox.style.display = "flex";
-lightboxImg.src = src;
+if(mainImage){
+
+    mainImage.addEventListener("click",function(){
+
+        lightbox.style.display="flex";
+
+        lightboxImg.src=mainImage.src;
+
+    });
 
 }
+
 
 function closeLightbox(){
-document.getElementById("lightbox").style.display = "none";
-}
 
-function nextImage(){
-
-currentIndex++;
-
-if(currentIndex >= images.length){
-currentIndex = 0;
-}
-
-document.getElementById("lightbox-img").src = images[currentIndex].src;
-
-}
-
-function prevImage(){
-
-currentIndex--;
-
-if(currentIndex < 0){
-currentIndex = images.length - 1;
-}
-
-document.getElementById("lightbox-img").src = images[currentIndex].src;
+    lightbox.style.display="none";
 
 }
 
 
-/* ---------- ADD THIS PART BELOW ---------- */
 
-let startX = 0;
+// ==========================
+// ENQUIRY POPUP
+// ==========================
 
-const lightboxImg = document.getElementById("lightbox-img");
+const modal=document.getElementById("enquiryModal");
 
-lightboxImg.addEventListener("touchstart", function(e){
-startX = e.touches[0].clientX;
+const enquiryBtn=document.querySelector(".enquiry-btn");
+
+const closeBtn=document.querySelector(".close-modal");
+
+
+if(enquiryBtn){
+
+    enquiryBtn.addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        modal.classList.add("active");
+
+    });
+
+}
+
+
+if(closeBtn){
+
+    closeBtn.addEventListener("click",function(){
+
+        modal.classList.remove("active");
+
+    });
+
+}
+
+
+window.addEventListener("click",function(e){
+
+    if(e.target===modal){
+
+        modal.classList.remove("active");
+
+    }
+
 });
 
-lightboxImg.addEventListener("touchend", function(e){
 
-let endX = e.changedTouches[0].clientX;
 
-if(startX - endX > 50){
-nextImage();
-}
+// ==========================
+// FORM SUBMIT
+// ==========================
 
-if(endX - startX > 50){
-prevImage();
-}
+const form=document.getElementById("enquiryForm");
+
+if(form){
+
+form.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    alert("Enquiry Submitted Successfully!");
+
+    modal.classList.remove("active");
+
+    form.reset();
+
+    if(product){
+
+        document.getElementById("productName").value=product.name;
+
+    }
 
 });
 
+}
+
+
+
+// ==========================
+// DISABLE RIGHT CLICK
+// ==========================
+
+document.addEventListener("contextmenu",function(e){
+
+    e.preventDefault();
+
+});
+
+// =======================
+// MODERN IMAGE ZOOM
+// =======================
+
+const image = document.getElementById("product-image");
+
+if(image){
+
+image.addEventListener("mousemove", function(e){
+
+    const rect = image.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+
+    const y = e.clientY - rect.top;
+
+    const xPercent = (x / rect.width) * 100;
+
+    const yPercent = (y / rect.height) * 100;
+
+    image.style.transformOrigin = xPercent + "% " + yPercent + "%";
+
+    image.style.transform = "scale(2)";
+
+});
+
+image.addEventListener("mouseleave", function(){
+
+    image.style.transform = "scale(1)";
+
+    image.style.transformOrigin = "center";
+
+});
+
+}
 </script>
-<script>
-document.addEventListener("contextmenu", function(e){
-e.preventDefault();
-});
-</script>
+
 </body>
 </html>
