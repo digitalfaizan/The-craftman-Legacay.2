@@ -492,145 +492,29 @@ padding:60px 20px;
 }
 
 
-/*==========================
-      OUR COMMITMENT
+/*=========================
+    OUR COMMITMENT IMAGE
 ==========================*/
 
-.commitment{
+.commitment-section{
 
-    background:#f8f6f3;
+    padding:80px 20px;
 
-    padding:100px 20px;
-
-}
-
-.commitment .section-title{
-
-    text-align:center;
-
-    margin-bottom:15px;
+    background:#F8F6F1;
 
 }
 
-.commitment .section-description{
+.commitment-img{
 
-    text-align:center;
+    display:block;
 
-    max-width:700px;
+    width:100%;
 
-    margin:0 auto 70px;
+    max-width:1400px;
 
-}
-
-.commitment-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:50px 30px;
-
-}
-
-.commitment-card{
-
-    text-align:center;
-
-    transition:.35s;
-
-}
-
-.commitment-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.commitment-card img{
-
-    width:70px;
-    height:70px;
-    object-fit:contain;
-
-    padding:18px;
-
-    background:#c9a46a;
-
-    border-radius:50%;
-
-    margin-bottom:20px;
-
-}
-
-.commitment-card h3{
-
-    font-size:20px;
-
-    margin-bottom:12px;
-
-    color:#1b1b1b;
-
-}
-
-.commitment-card p{
-
-    font-size:15px;
-
-    color:#666;
-
-    line-height:1.7;
-
-    max-width:220px;
+    height:auto;
 
     margin:auto;
-
-}
-
-@media(max-width:992px){
-
-.commitment-grid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:768px){
-
-.commitment{
-
-padding:70px 20px;
-
-}
-
-.commitment-grid{
-
-grid-template-columns:1fr;
-
-gap:40px;
-
-}
-
-.commitment-card img{
-
-width:70px;
-
-height:70px;
-
-}
-
-.commitment-card h3{
-
-font-size:18px;
-
-}
-
-.commitment-card p{
-
-font-size:14px;
-
-}
 
 }
 
@@ -645,42 +529,123 @@ font-size:14px;
     margin: 0 auto;
     padding: 0 20px;
 }
-.catalog-buttons{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-}
-.catalog-btn{
-background:#c9a46a;
-color:white;
-padding:12px 28px;
-border-radius:6px;
-text-decoration:none;
-font-weight:600;
-}
+.catalog-btn,
 .WhatsApp-btn{
-background:#25D366;
-color:white;
-padding:12px 28px;
-border-radius:6px;
-text-decoration:none;
-font-weight:600;
+
+    position:relative;
+    overflow:hidden;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:14px 34px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:all .45s ease;
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
 }
+
+/* GOLD BUTTON */
+
+.catalog-btn{
+
+    background:#c9a46a;
+
+    color:#fff;
+
+    border:2px solid #c9a46a;
+
+}
+
+/* WHATSAPP BUTTON */
+
+.WhatsApp-btn{
+
+    background:#25D366;
+
+    color:#fff;
+
+    border:2px solid #25D366;
+
+}
+
+
+/* SLIDING SHINE */
+
+.catalog-btn::before,
+.WhatsApp-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+
+    transition:.7s;
+
+}
+
+
+/* HOVER */
+
 .catalog-btn:hover{
-background:#b89555;
+
+    background:rgba(201,164,106,.15);
+
+    color:#000;
+
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
+
 }
+
 
 .WhatsApp-btn:hover{
-background:#1ebc59;
-}
-@media (max-width:768px){
 
-.catalog-buttons{
-flex-direction:column;
-align-items:center;
+    background:rgba(37,211,102,.15);
+
+    color:#25D366;
+
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
+
 }
+
+
+/* SHINE MOVES */
+
+.catalog-btn:hover::before,
+.WhatsApp-btn:hover::before{
+
+    left:120%;
 
 }
 
