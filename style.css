@@ -491,10 +491,155 @@ padding:60px 20px;
 
 }
 
+.commitment{
+
+    background:#0D2B14;
+
+    padding:90px 20px;
+
+}
+
+.white{
+
+    color:#fff;
+    text-align:center;
+
+}
+
+.white-text{
+
+    color:#d7d7d7;
+    text-align:center;
+    margin-bottom:60px;
+
+}
+
+.commitment-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:50px;
+
+    max-width:1200px;
+
+    margin:auto;
+
+}
+
+.commitment-card{
+
+    text-align:center;
+
+}
+
+.icon-circle{
+
+    width:110px;
+
+    height:110px;
+
+    border:2px solid rgba(255,255,255,.3);
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:0 auto 20px;
+
+    transition:.35s;
+
+}
+
+.icon-circle i{
+
+    font-size:45px;
+
+    color:#fff;
+
+}
+
+.commitment-card h3{
+
+    color:#fff;
+
+    margin-bottom:12px;
+
+}
+
+.commitment-card p{
+
+    color:#d8d8d8;
+
+    line-height:1.7;
+
+}
+
+.commitment-card:hover .icon-circle{
+
+    background:#C9A46A;
+
+    border-color:#C9A46A;
+
+    transform:translateY(-8px);
+
+}
+
+@media(max-width:992px){
+
+.commitment-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:576px){
+
+.commitment-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+gap:30px;
+
+}
+
+.icon-circle{
+
+width:80px;
+height:80px;
+
+}
+
+.icon-circle i{
+
+font-size:32px;
+
+}
+
+.commitment-card h3{
+
+font-size:18px;
+
+}
+
+.commitment-card p{
+
+font-size:14px;
+
+}
+
+}
 
 /*=========================
     OUR COMMITMENT IMAGE
-==========================*/
+==========================
 
 .commitment-section{
 
@@ -516,7 +661,7 @@ padding:60px 20px;
 
     margin:auto;
 
-}
+}*/
 
 /*===== section catalog====*/
 .catalog{
